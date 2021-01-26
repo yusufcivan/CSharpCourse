@@ -28,6 +28,12 @@ namespace EntityFrameWorkDemo
         {
             dgwProducts.DataSource = _productDal.getAll();
         }
+        private void SearchProducts(string key)
+        {
+            //var result = _productDal.getAll().Where(p=>p.Name.ToLower().Contains(key.ToLower())).ToList();
+            var result = _productDal.getByName(key);
+            dgwProducts.DataSource = result;
+        }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
@@ -69,6 +75,16 @@ namespace EntityFrameWorkDemo
             });
             LoadProducts();
             MessageBox.Show("Deleted");
+        }
+
+        private void tbxSearch_TextChanged(object sender, EventArgs e)
+        {
+            SearchProducts(tbxSearch.Text);
+        }
+
+        private void tbxGetById_Click(object sender, EventArgs e)
+        {
+            _productDal.GetById(1);
         }
     }
 }
